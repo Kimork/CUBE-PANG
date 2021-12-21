@@ -5,17 +5,33 @@ using UnityEngine;
 public class BoardInput : MonoBehaviour
 {
     public Board Board;
+    private bool m_IsInputable = true;
     private void Awake()
     {
         Board = (Board)GetComponent("Board");
         Board.BoardInput = this;
     }
 
+    public void InputEnable()
+    {
+        m_IsInputable = true;
+    }
+
+    public void InputDisable()
+    {
+        m_IsInputable = false;
+    }
+
     public void Pop(Vector2Int clickedPos)
     {
-        if (!ReferenceEquals(Board.GetBall(clickedPos), null))
+        if (m_IsInputable)
         {
-            Board.BoardFiller.DestroyBall(Board.BoardQuery.GetPopBalls(clickedPos));
+            InputDisable();
+
+            if (!ReferenceEquals(Board.GetBall(clickedPos), null))
+            {
+                Board.BoardFiller.DestroyBall(Board.BoardQuery.GetPopBalls(clickedPos));
+            }
         }
     }
 }

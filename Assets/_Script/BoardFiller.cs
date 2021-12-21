@@ -171,6 +171,8 @@ public class BoardFiller : MonoBehaviour
 
         yield return new WaitUntil(() => Board.BallController.IsMoving == 0);
 
+        Board.BoardInput.InputEnable();
+
 
         if (_isPinch)
         {
@@ -186,5 +188,7 @@ public class BoardFiller : MonoBehaviour
 
         if (_isGameOver)
             SceneManager.LoadScene(0);
+        else
+            Board.AddScore();
     }
 }
