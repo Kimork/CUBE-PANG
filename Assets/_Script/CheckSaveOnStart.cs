@@ -1,11 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 public class CheckSaveOnStart : MonoBehaviour
 {
     private void Awake()
+    {
+        InitGPGS();
+        //CheckData();
+    }
+
+    private void InitGPGS()
+    {
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+            .RequestServerAuthCode(false)
+            .Build();
+        PlayGamesPlatform.InitializeInstance(config);
+
+        PlayGamesPlatform.Activate();
+        LoginGPGS();
+    }
+
+    private void LoginGPGS()
+    {
+
+        try
+        {
+
+            if (PlayGamesPlatform.Instance.IsAuthenticated())
+            {
+                CheckData();
+            }
+            else
+            {
+                PlayGamesPlatform.Instance.Authenticate((bool Success) =>
+                {
+                    if (Success)
+                    {
+                        CheckData();
+                    }
+                    else
+                    {
+                        //로그인 실패
+                    }
+                });
+            }
+        }
+        catch (System.Exception e)
+        {
+            throw;
+        } 
+    }
+
+    private void CheckData()
     {
         SetEncryptedPlayerPrefs();
 
