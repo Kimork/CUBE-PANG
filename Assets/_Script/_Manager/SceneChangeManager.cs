@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneChangeManager : SingletonManager<SceneChangeManager>
 {
+
     public void SceneLoad(int sceneNum)
     {
         SceneManager.LoadScene(sceneNum);

@@ -34,6 +34,9 @@ public class Ball : MonoBehaviour, IPoolAble
     private int m_PoolIndex;
     private Sequence m_AfraidSequence;
 
+    public const float BallAfraidAnimStrength = 0.04f;
+    public const float BallAfraidAnimDurTime = 0.07f;
+
     public void SetColor(MatchValue color)
     {
         if (ReferenceEquals(m_SpriteRenderer, null))
@@ -53,8 +56,8 @@ public class Ball : MonoBehaviour, IPoolAble
     public void StartAfraidAnim()
     {
         m_AfraidSequence = DOTween.Sequence()
-            .Append(transform.DOLocalMove(new Vector3(CurrentPos.x + 0.04f, CurrentPos.y, 0), 0.07f))
-            .Append(transform.DOLocalMove(new Vector3(CurrentPos.x - 0.04f, CurrentPos.y, 0), 0.07f))
+            .Append(transform.DOLocalMove(new Vector3(CurrentPos.x + BallAfraidAnimStrength, CurrentPos.y, 0), BallAfraidAnimDurTime))
+            .Append(transform.DOLocalMove(new Vector3(CurrentPos.x - BallAfraidAnimStrength, CurrentPos.y, 0), BallAfraidAnimDurTime))
             .SetLoops(-1);
 
         IsPlayAfraid = true;

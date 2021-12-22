@@ -9,24 +9,32 @@ public class NumToImageString : MonoBehaviour
     public Image[] ImageObjects;
 
     private List<Vector2Int> m_FontsSize;
+    private RectTransform m_ThisRectTransform;
+    private Vector2 m_BasePosition;
 
     private void Awake()
     {
-        m_FontsSize = new List<Vector2Int>();
+        if (m_FontsSize == null)
+        {
+            m_FontsSize = new List<Vector2Int>();
 
-        m_FontsSize.Add(new Vector2Int(76, 86));
-        m_FontsSize.Add(new Vector2Int(45, 86));
-        m_FontsSize.Add(new Vector2Int(64, 86));
-        m_FontsSize.Add(new Vector2Int(64, 86));
-        m_FontsSize.Add(new Vector2Int(78, 86));
-        m_FontsSize.Add(new Vector2Int(65, 86));
-        m_FontsSize.Add(new Vector2Int(69, 86));
-        m_FontsSize.Add(new Vector2Int(63, 86));
-        m_FontsSize.Add(new Vector2Int(71, 86));
-        m_FontsSize.Add(new Vector2Int(69, 86));
+            m_FontsSize.Add(new Vector2Int(76, 86));
+            m_FontsSize.Add(new Vector2Int(45, 86));
+            m_FontsSize.Add(new Vector2Int(64, 86));
+            m_FontsSize.Add(new Vector2Int(64, 86));
+            m_FontsSize.Add(new Vector2Int(78, 86));
+            m_FontsSize.Add(new Vector2Int(65, 86));
+            m_FontsSize.Add(new Vector2Int(69, 86));
+            m_FontsSize.Add(new Vector2Int(63, 86));
+            m_FontsSize.Add(new Vector2Int(71, 86));
+            m_FontsSize.Add(new Vector2Int(69, 86));
+
+            m_ThisRectTransform = (RectTransform)GetComponent("RectTransform");
+            m_BasePosition = m_ThisRectTransform.anchoredPosition;
+        }
     }
 
-    public void SetString(int num)
+    public void SetString(int num, bool rePosition = false)
     {
         if (num <= 999999)
         {
@@ -34,7 +42,7 @@ public class NumToImageString : MonoBehaviour
 
             int _objectIndex = 0;
             int _prevX = 0;
-
+            int _calPos = 0;
             foreach (var _char in _string)
             {
                 var _target = ImageObjects[_objectIndex++];
@@ -44,42 +52,15 @@ public class NumToImageString : MonoBehaviour
                 _target.rectTransform.sizeDelta = m_FontsSize[_num];
                 _target.rectTransform.anchoredPosition = new Vector2(_prevX, 0);
 
+                if (rePosition)
+                    _calPos += m_FontsSize[_num].x;
+
                 _prevX += m_FontsSize[_num].x;
                 _target.gameObject.SetActive(true);
             }
-        }
-    }
 
-    private int testa = 0;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (testa == 0)
-            {
-                SetString(10);
-                testa++;
-            }
-            else if (testa == 1)
-            {
-                SetString(213);
-                testa++;
-            }
-            else if (testa == 2)
-            {
-                SetString(3494);
-                testa++;
-            }
-            else if (testa == 3)
-            {
-                SetString(9746);
-                testa++;
-            }
-            else if (testa == 4)
-            {
-                SetString(39271);
-                testa++;
-            }
+            if (rePosition)
+                m_ThisRectTransform.anchoredPosition = new Vector2((468 + _calPos) / 2 * -1f, m_BasePosition.y);
         }
     }
 

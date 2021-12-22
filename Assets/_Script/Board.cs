@@ -19,26 +19,144 @@ public class Board : MonoBehaviour
 
     public NumToImageString ScoreUI;
     public NumToImageString RecordUI;
+    public GameObject GameOverUI;
+    public NumToImageString GameOverScoreUI;
     public int Score = 0;
     public int Record = 0;
+
+    public bool IsPlayingNow = false;
+
+    public static string RecordKey = "Record";
+    public static string IsPlayingKey = "IsPlaying";
+    public static string PresetIndexKey = "PresetIndex";
+    public static string BallsDataKey = "BallsData";
+    public static string LastScoreKey = "LastScore";
 
     private void Start()
     {
         CurrentBalls = new Ball[BoardSize.x, BoardSize.y];
         CreateTiles();
-        //Screen.SetResolution(1080, 1920, false);
 
+        CheckData();
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus && IsPlayingNow && BoardInput.IsInputableNow())
+            SaveCurrentData();
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (IsPlayingNow && BoardInput.IsInputableNow())
+            SaveCurrentData();
+    }
+
+    public void GameOver()
+    {
+        BoardInput.InputDisable();
+        GameOverUI.SetActive(true);
+        GameOverScoreUI.SetString(Score, true);
+        EncryptedPlayerPrefs.SetInt(RecordKey, Record);
+
+        foreach (var _ball in CurrentBalls)
+        {
+            if (!ReferenceEquals(_ball, null))
+                _ball.StopAfraidAnim();
+        }
+
+        ClearSaveData();
+    }
+
+    public string BallsToData()
+    {
+        string _result = "";
+
+        for (int x = 0; x < BoardSize.x; x++)
+        {
+            for (int y = 0; y < BoardSize.y; y++)
+            {
+                if (ReferenceEquals(CurrentBalls[x, y], null))
+                {
+                    _result += '9';
+                }
+                else
+                {
+                    for (int i = 0; i < BoardFiller.CurrentBallPreset.Length; i++)
+                    {
+                        if (BoardFiller.CurrentBallPreset[i] == CurrentBalls[x, y].MatchColor)
+                            _result += $"{i}";
+                    }
+                }
+            }
+        }
+
+        return _result;
+    }
+
+    public void CheckData()
+    {
+        if (EncryptedPlayerPrefs.GetInt(IsPlayingKey) == 1)
+        {
+            LoadLastGame();
+        }
+        else
+        {
+            StartNewGame();
+        }
+    }
+
+    public void LoadLastGame()
+    {
+        Record = EncryptedPlayerPrefs.GetInt(RecordKey);
+        RecordUI.SetString(Record);
+
+        Score = EncryptedPlayerPrefs.GetInt(LastScoreKey);
+        ScoreUI.SetString(Score);
+
+        BoardFiller.SetPreset(EncryptedPlayerPrefs.GetInt(PresetIndexKey));
+        BoardFiller.FillRowFromData(EncryptedPlayerPrefs.GetString(BallsDataKey));
+
+        IsPlayingNow = true;
+        ClearSaveData();
+    }
+
+    public void SaveCurrentData()
+    {
+        EncryptedPlayerPrefs.SetInt(IsPlayingKey, 1);
+        EncryptedPlayerPrefs.SetInt(PresetIndexKey, BoardFiller.CurrentBallPresetIndex);
+        EncryptedPlayerPrefs.SetInt(LastScoreKey, Score);
+        EncryptedPlayerPrefs.SetInt(RecordKey, Record);
+        EncryptedPlayerPrefs.SetString(BallsDataKey, BallsToData());
+    }
+
+    public void ClearSaveData()
+    {
+        EncryptedPlayerPrefs.SetInt(IsPlayingKey, 0);
+        EncryptedPlayerPrefs.SetInt(PresetIndexKey, 0);
+        EncryptedPlayerPrefs.SetInt(LastScoreKey, 0);
+        EncryptedPlayerPrefs.SetString(BallsDataKey, "Null");
+    }
+
+    public void StartNewGame()
+    {
+        Record = EncryptedPlayerPrefs.GetInt(RecordKey);
+        RecordUI.SetString(Record);
+
+        BoardFiller.SetPreset();
         BoardFiller.FillRow();
+
+        IsPlayingNow = true;
     }
 
     public void AddScore()
     {
         ScoreUI.SetString(++Score);
-    }
-
-    public void AddRecord()
-    {
-        RecordUI.SetString(++Record);
+        if (Record < Score)
+        {
+            RecordUI.SetString(Score);
+            Record = Score;
+        }
     }
 
 

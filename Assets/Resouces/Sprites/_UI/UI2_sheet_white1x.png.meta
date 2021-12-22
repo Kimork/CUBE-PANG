@@ -7,7 +7,7 @@ TextureImporter:
     second: UI2_sheet_white1x_0
   - first:
       213: -4201387794600659086
-    second: UI2_sheet_white1x_1
+    second: Restart
   - first:
       213: 3589856444024781388
     second: UI2_sheet_white1x_2
@@ -19,7 +19,7 @@ TextureImporter:
     second: UI2_sheet_white1x_4
   - first:
       213: 4703075439029188572
-    second: UI2_sheet_white1x_5
+    second: Home
   - first:
       213: 6587174017013465952
     second: UI2_sheet_white1x_6
@@ -603,7 +603,7 @@ TextureImporter:
         width: 35
         height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -616,7 +616,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI2_sheet_white1x_1
+      name: Restart
       rect:
         serializedVersion: 2
         x: 208
@@ -624,7 +624,7 @@ TextureImporter:
         width: 37
         height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -645,7 +645,7 @@ TextureImporter:
         width: 37
         height: 37
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -666,7 +666,7 @@ TextureImporter:
         width: 44
         height: 33
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -687,7 +687,7 @@ TextureImporter:
         width: 46
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -695,6 +695,27 @@ TextureImporter:
       bones: []
       spriteID: 13af3eb29df4b99b0800000000000000
       internalID: -5072372761139873231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Home
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 468
+        width: 40
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd7f23f913ea44140800000000000000
+      internalID: 4703075439029188572
       vertices: []
       indices: 
       edges: []

@@ -22,6 +22,8 @@ public class BoardInput : MonoBehaviour
         m_IsInputable = false;
     }
 
+    public bool IsInputableNow() { return m_IsInputable; }
+
     public void Pop(Vector2Int clickedPos)
     {
         if (m_IsInputable)
@@ -31,6 +33,10 @@ public class BoardInput : MonoBehaviour
             if (!ReferenceEquals(Board.GetBall(clickedPos), null))
             {
                 Board.BoardFiller.DestroyBall(Board.BoardQuery.GetPopBalls(clickedPos));
+            }
+            else
+            {
+                InputEnable();
             }
         }
     }

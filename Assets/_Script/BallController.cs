@@ -9,10 +9,17 @@ public class BallController : MonoBehaviour
     public AnimationCurve DumpSizeCurve;
     public int IsMoving = 0;
 
+
+    public const float BallDumpAnimTargetHeight = 0.8f;
+    public const float BallDumpAnimDurTime_DownScale = 0.12f;
+    public const float BallDumpAnimDurTime_UpScale = 0.12f;
+
     private void Awake()
     {
         Board = (Board)GetComponent("Board");
         Board.BallController = this;
+
+     
     }
 
     public async void MoveBall(Ball target, Vector2Int dest, float speed, bool playAnim = false)
@@ -32,8 +39,8 @@ public class BallController : MonoBehaviour
         if (playAnim)
         {
             Sequence _dumpAnim = DOTween.Sequence()
-                .Append(_target.DOScaleY(0.8f, 0.12f).SetEase(DumpSizeCurve))
-                .Append(_target.DOScaleY(1, 0.12f));
+                .Append(_target.DOScaleY(BallDumpAnimTargetHeight, BallDumpAnimDurTime_DownScale).SetEase(DumpSizeCurve))
+                .Append(_target.DOScaleY(1, BallDumpAnimDurTime_UpScale));
         }
 
         IsMoving--;

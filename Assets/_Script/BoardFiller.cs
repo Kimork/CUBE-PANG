@@ -12,12 +12,17 @@ public class BoardFiller : MonoBehaviour
 
     public ObjectPoolManager<Ball> BallPool;
     public AnimationCurve BallPopCurve;
+    public MatchValue[] CurrentBallPreset;
+    public int CurrentBallPresetIndex = 0;
 
     private Vector2Int m_Size;
     private int m_SponeHeight;
     private List<List<int[]>> m_LinePreset;
-    private MatchValue[] m_BallPreset;
     private int m_DestroyingBallCount = 0;
+
+    public const float BallPopAnimTargetSize = 0.6f;
+    public const float BallPopAnimDurTime = 0.25f;
+    public const float BallMoveAnimDurTime = 0.2f;
 
     private void Awake()
     {
@@ -28,10 +33,9 @@ public class BoardFiller : MonoBehaviour
         m_SponeHeight = m_Size.y + 1;
 
         BallPool = new ObjectPoolManager<Ball>(BallPrefab, Board.transform, m_Size.x * m_Size.y + 10, new Vector3(-5, -5, 0));
-        SetPreset();
     }
 
-    private void SetPreset()
+    public void SetPreset(int ballPresetIndex = -1)
     {
         m_LinePreset = new List<List<int[]>>();
 
@@ -49,8 +53,17 @@ public class BoardFiller : MonoBehaviour
         _BallPreset.Add(new MatchValue[] { MatchValue.Dog, MatchValue.Orca, MatchValue.Panda, MatchValue.Donkey });
         _BallPreset.Add(new MatchValue[] { MatchValue.Panda, MatchValue.Snake, MatchValue.Donkey, MatchValue.Pig });
 
-        var _index = Random.Range(0, _BallPreset.Count);
-        m_BallPreset = _BallPreset[_index];
+        if (ballPresetIndex == -1)
+        {
+            var _index = Random.Range(0, _BallPreset.Count);
+            CurrentBallPreset = _BallPreset[_index];
+            CurrentBallPresetIndex = _index;
+        }
+        else
+        {
+            CurrentBallPreset = _BallPreset[ballPresetIndex];
+            CurrentBallPresetIndex = ballPresetIndex;
+        }
     }
 
     public async void DestroyBall(Ball target)
@@ -60,7 +73,7 @@ public class BoardFiller : MonoBehaviour
         var _target = target.transform;
 
         target.SetPopSprite();
-        var _popTween = _target.DOScale(new Vector3(0.6f, 0.6f, 1), 0.25f).SetEase(BallPopCurve);
+        var _popTween = _target.DOScale(new Vector3(BallPopAnimTargetSize, BallPopAnimTargetSize, 1), BallPopAnimDurTime).SetEase(BallPopCurve);
         await _popTween.AsyncWaitForCompletion();
 
         if (target.IsPlayAfraid)
@@ -98,11 +111,64 @@ public class BoardFiller : MonoBehaviour
                     var _nullCheck = Board.BoardQuery.GetNullSpaceInColumn(new Vector2Int(x, y));
 
                     if (_nullCheck.x != -1)
-                        Board.BallController.MoveBall(Board.GetBall(new Vector2Int(x, y)), _nullCheck, 0.12f);
+                        Board.BallController.MoveBall(Board.GetBall(new Vector2Int(x, y)), _nullCheck, BallMoveAnimDurTime);
                 }
             }
         }
     }
+
+    public void FillRowFromData(string data)
+    {
+        StartCoroutine(FillRowFromDataRoutine(data));
+    }
+
+    private  IEnumerator FillRowFromDataRoutine(string data)
+    {
+        Board.BoardInput.InputDisable();
+
+        bool _isPinch = false;
+        int _charIndex = 0;
+
+        for (int x = 0; x < m_Size.x; x++)
+        {
+            for (int y = 0; y < m_Size.y; y++)
+            {
+                var _targetIndex = (int)char.GetNumericValue(data[_charIndex++]);
+
+                if (_targetIndex != 9)
+                {
+                    var _newBall = BallPool.GetObject();
+                    _newBall.transform.localPosition = new Vector3(x, m_SponeHeight, 0);
+                    _newBall.transform.localScale = new Vector3(1, 1, 1);
+                    _newBall.SetColor(CurrentBallPreset[_targetIndex]);
+
+                    _newBall.gameObject.SetActive(true);
+                    Board.BallController.MoveBall(_newBall, new Vector2Int(x, y), BallMoveAnimDurTime, true);
+
+                    if (y == m_Size.y - 1)
+                        _isPinch = true;
+                }
+            }
+        }
+
+        yield return new WaitUntil(() => Board.BallController.IsMoving == 0);
+
+        Board.BoardInput.InputEnable();
+
+
+        if (_isPinch)
+        {
+            foreach (var _ball in Board.CurrentBalls)
+            {
+                if (!ReferenceEquals(_ball, null))
+                {
+                    _ball.SetPopSprite();
+                    _ball.StartAfraidAnim();
+                }
+            }
+        }
+    }
+
     public void FillRow()
     {
         StartCoroutine(FillRowRoutine());
@@ -125,7 +191,7 @@ public class BoardFiller : MonoBehaviour
 
         MatchValue[] _value = new MatchValue[m_LinePreset[_presetIndex].Count];
 
-        var _valueList = m_BallPreset.ToList();
+        var _valueList = CurrentBallPreset.ToList();
 
         for (int i = 0; i < _value.Length; i++)
         {
@@ -154,7 +220,7 @@ public class BoardFiller : MonoBehaviour
                             _newBall.SetColor(_value[i]);
 
                             _newBall.gameObject.SetActive(true);
-                            Board.BallController.MoveBall(_newBall, new Vector2Int(x, y), 0.12f, true);
+                            Board.BallController.MoveBall(_newBall, new Vector2Int(x, y), BallMoveAnimDurTime, true);
                         }
                     }
 
@@ -187,7 +253,7 @@ public class BoardFiller : MonoBehaviour
         }
 
         if (_isGameOver)
-            SceneManager.LoadScene(0);
+            Board.GameOver();
         else
             Board.AddScore();
     }
