@@ -8,10 +8,17 @@ using GooglePlayGames.BasicApi;
 
 public class CheckSaveOnStart : MonoBehaviour
 {
+    public static bool IsLoginGPGS = false;
+
     private void Awake()
     {
+#if UNITY_ANDROID 
         InitGPGS();
-        //CheckData();
+#endif
+
+#if UNITY_EDITOR_WIN
+        CheckData();
+#endif
     }
 
     private void InitGPGS()
@@ -42,15 +49,17 @@ public class CheckSaveOnStart : MonoBehaviour
                     if (Success)
                     {
                         CheckData();
+                        IsLoginGPGS = Success;
                     }
                     else
                     {
                         //로그인 실패
+                        IsLoginGPGS = Success;
                     }
                 });
             }
         }
-        catch (System.Exception e)
+        catch (System.Exception)
         {
             throw;
         } 

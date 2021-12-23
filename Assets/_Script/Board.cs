@@ -57,7 +57,38 @@ public class Board : MonoBehaviour
         BoardInput.InputDisable();
         GameOverUI.SetActive(true);
         GameOverScoreUI.SetString(Score, true);
-        EncryptedPlayerPrefs.SetInt(RecordKey, Record);
+
+        if (Record == Score)
+        {
+            EncryptedPlayerPrefs.SetInt(RecordKey, Record);
+
+#if UNITY_ANDROID
+            try
+            {
+                if (CheckSaveOnStart.IsLoginGPGS)
+                {
+                    Social.ReportScore(Record, GPGSIds.leaderboard_best_score, 
+                        (success) => 
+                        {
+                            if (success)
+                            {
+                                //리더보드 등록 성공
+                            }
+                            else
+                            {
+                                //리더보드 등록 실패
+                                throw new System.Exception("리더보드 등록 에러");
+                            }
+                        });
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+#endif
+        }
 
         foreach (var _ball in CurrentBalls)
         {

@@ -4,7 +4,7 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -4294913084026241446
-    second: UI2_sheet_white1x_0
+    second: Achievement
   - first:
       213: -4201387794600659086
     second: Restart
@@ -595,7 +595,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI2_sheet_white1x_0
+      name: Achievement
       rect:
         serializedVersion: 2
         x: 258
@@ -708,7 +708,7 @@ TextureImporter:
         width: 40
         height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
