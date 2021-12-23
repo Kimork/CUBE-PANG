@@ -209,6 +209,7 @@ public class Board : MonoBehaviour
     {
         Record = EncryptedPlayerPrefs.GetInt(RecordKey);
         RecordUI.SetString(Record);
+        ScoreUI.SetString(0);
 
         BoardFiller.SetPreset();
         BoardFiller.FillRow();

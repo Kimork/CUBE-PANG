@@ -41,6 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Backgrounds
+    uniqueID: 983009321
+    locked: 0
+  - name: Balls
+    uniqueID: 1257238765
+    locked: 0
   - name: UI
     uniqueID: 4202112179
     locked: 0

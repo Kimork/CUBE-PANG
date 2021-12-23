@@ -63,6 +63,12 @@ public class Ball : MonoBehaviour, IPoolAble
         IsPlayAfraid = true;
     }
 
+    private void OnDestroy()
+    {
+        if (!ReferenceEquals(m_AfraidSequence, null))
+            m_AfraidSequence.Kill();
+    }
+
     public void StopAfraidAnim()
     {
         m_AfraidSequence.Kill();

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: IngameBackgrounds
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 4e170758a73228a4eb89d87a818a22ae, type: 3}
+    - {fileID: 2800000, guid: 5478b537914a6d34e8c2d594ffb104f9, type: 3}
+    - {fileID: 2800000, guid: a6375228e6373944d81583256e45512b, type: 3}
+    - {fileID: 2800000, guid: 88b55125181082b42811df54254d0484, type: 3}
+    - {fileID: 2800000, guid: 6bd8e0fda0a24154691e7dbfcecd8476, type: 3}
+    - {fileID: 2800000, guid: d8cf1de9ce1275e4fb1627cec24fdbac, type: 3}
+    - {fileID: 2800000, guid: 45942a526d2c48d40b099f2acf52e1ba, type: 3}
+    - {fileID: 2800000, guid: 99bf33a585e16da42b7465cf2fad1386, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 45942a526d2c48d40b099f2acf52e1ba, type: 3}
+  - {fileID: 21300000, guid: 88b55125181082b42811df54254d0484, type: 3}
+  - {fileID: 21300000, guid: 99bf33a585e16da42b7465cf2fad1386, type: 3}
+  - {fileID: 21300000, guid: 5478b537914a6d34e8c2d594ffb104f9, type: 3}
+  - {fileID: 21300000, guid: a6375228e6373944d81583256e45512b, type: 3}
+  - {fileID: 21300000, guid: 4e170758a73228a4eb89d87a818a22ae, type: 3}
+  - {fileID: 21300000, guid: d8cf1de9ce1275e4fb1627cec24fdbac, type: 3}
+  - {fileID: 21300000, guid: 6bd8e0fda0a24154691e7dbfcecd8476, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - GrassMid
+  - DirtLeft
+  - GrassRight
+  - Cloud_2
+  - Dirt
+  - Cloud_1
+  - GrassLeft
+  - DirtRight
+  m_RenderDataMap: {}
+  m_Tag: IngameBackgrounds
+  m_IsVariant: 0
