@@ -31,6 +31,8 @@ public class Board : MonoBehaviour
     public static string PresetIndexKey = "PresetIndex";
     public static string BallsDataKey = "BallsData";
     public static string LastScoreKey = "LastScore";
+    public static string ShowADKey = "ShowAD";
+    public static int ShowADTerm = 2;
 
     private void Start()
     {
@@ -55,9 +57,44 @@ public class Board : MonoBehaviour
     public void GameOver()
     {
         BoardInput.InputDisable();
+
+#if UNITY_ANDROID
+
+        try
+        {
+            var _adShowValue = EncryptedPlayerPrefs.GetInt(ShowADKey);
+            if (_adShowValue <= 0)
+            {
+                if (OnGameStart.Instance != null)
+                {
+                    OnGameStart.Instance.AddClosedCallbackPopupAD((sender, arg) =>
+                    {
+                        VeiwGameOverUI();
+                        ClearSaveData();
+                    });
+                }
+                EncryptedPlayerPrefs.SetInt(ShowADKey, ShowADTerm);
+            }
+            else
+            {
+                VeiwGameOverUI();
+                ClearSaveData();
+                EncryptedPlayerPrefs.SetInt(ShowADKey, --_adShowValue);
+            }
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+#endif
+
+    }
+
+    private void VeiwGameOverUI()
+    {
         GameOverUI.SetActive(true);
         GameOverScoreUI.SetString(Score, true);
-
         if (Record == Score)
         {
             EncryptedPlayerPrefs.SetInt(RecordKey, Record);
@@ -65,19 +102,20 @@ public class Board : MonoBehaviour
 #if UNITY_ANDROID
             try
             {
-                if (CheckSaveOnStart.IsLoginGPGS)
+
+                if (OnGameStart.IsLoginGPGS)
                 {
-                    Social.ReportScore(Record, GPGSIds.leaderboard_best_score, 
-                        (success) => 
+                    Social.ReportScore(Record, GPGSIds.leaderboard_best_score,
+                        (success) =>
                         {
                             if (success)
                             {
-                                //리더보드 등록 성공
-                            }
+                                    //리더보드 등록 성공
+                                }
                             else
                             {
-                                //리더보드 등록 실패
-                                throw new System.Exception("리더보드 등록 에러");
+                                    //리더보드 등록 실패
+                                    throw new System.Exception("리더보드 등록 에러");
                             }
                         });
                 }
@@ -95,8 +133,6 @@ public class Board : MonoBehaviour
             if (!ReferenceEquals(_ball, null))
                 _ball.StopAfraidAnim();
         }
-
-        ClearSaveData();
     }
 
     public string BallsToData()

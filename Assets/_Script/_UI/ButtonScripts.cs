@@ -16,7 +16,7 @@ public class ButtonScripts : MonoBehaviour
 #if UNITY_ANDROID 
         try
         {
-            if (CheckSaveOnStart.IsLoginGPGS)
+            if (OnGameStart.IsLoginGPGS)
                 Social.ShowLeaderboardUI();
         }
         catch (System.Exception)
@@ -32,7 +32,7 @@ public class ButtonScripts : MonoBehaviour
 #if UNITY_ANDROID 
         try
         {
-            if (CheckSaveOnStart.IsLoginGPGS)
+            if (OnGameStart.IsLoginGPGS)
                 Social.ShowAchievementsUI();
         }
         catch (System.Exception)
