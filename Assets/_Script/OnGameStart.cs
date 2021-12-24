@@ -9,6 +9,7 @@ using GoogleMobileAds.Api;
 public class OnGameStart : SingletonManager<OnGameStart>
 {
     public static bool IsLoginGPGS = false;
+    public static bool ShowAD = false;
 
     private BannerView m_BannerView;
     private InterstitialAd m_PopupAD;
@@ -30,7 +31,8 @@ public class OnGameStart : SingletonManager<OnGameStart>
         base.Awake();
 #if UNITY_ANDROID
         InitGPGS();
-        InitAdMob();
+        if (ShowAD)
+            InitAdMob();
 #endif
         GotoNextScene();
     }

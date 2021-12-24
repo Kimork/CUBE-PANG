@@ -65,19 +65,28 @@ public class Board : MonoBehaviour
             var _adShowValue = EncryptedPlayerPrefs.GetInt(ShowADKey);
             if (_adShowValue <= 0)
             {
-                if (OnGameStart.Instance != null)
+                if (OnGameStart.Instance != null && OnGameStart.ShowAD)
                 {
                     OnGameStart.Instance.AddClosedCallbackPopupAD((sender, arg) =>
                     {
                         VeiwGameOverUI();
+                        LetterBox.Instance.EnablePanel();
                         ClearSaveData();
                     });
+                }
+                else
+                {
+                    VeiwGameOverUI();
+                    LetterBox.Instance.EnablePanel();
+                    ClearSaveData();
+                    EncryptedPlayerPrefs.SetInt(ShowADKey, --_adShowValue);
                 }
                 EncryptedPlayerPrefs.SetInt(ShowADKey, ShowADTerm);
             }
             else
             {
                 VeiwGameOverUI();
+                LetterBox.Instance.EnablePanel();
                 ClearSaveData();
                 EncryptedPlayerPrefs.SetInt(ShowADKey, --_adShowValue);
             }
@@ -111,7 +120,7 @@ public class Board : MonoBehaviour
                             if (success)
                             {
                                     //리더보드 등록 성공
-                                }
+                            }
                             else
                             {
                                     //리더보드 등록 실패

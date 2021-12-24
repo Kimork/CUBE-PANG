@@ -15,7 +15,7 @@ public class CloudMove : MonoBehaviour
 
     private void Start()
     {
-        m_tweens = new DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions>[3];
+        m_tweens = new DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions>[Clouds.Length];
         for (int i = 0; i < Clouds.Length; i++)
         {
             MoveClouds(i);

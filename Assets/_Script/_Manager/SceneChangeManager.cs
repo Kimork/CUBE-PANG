@@ -15,7 +15,7 @@ public class SceneChangeManager : SingletonManager<SceneChangeManager>
             if (LetterBox.Instance != null)
                 LetterBox.Instance.RefreshCam();
 
-            if (OnGameStart.Instance != null)
+            if (OnGameStart.Instance != null && OnGameStart.ShowAD)
             {
                 OnGameStart.Instance.InitBannerAD();
 
@@ -31,6 +31,7 @@ public class SceneChangeManager : SingletonManager<SceneChangeManager>
 
     public void SceneLoad(int sceneNum)
     {
+        LetterBox.Instance.DisablePanel();
         SceneManager.LoadScene(sceneNum);
     }
 }
