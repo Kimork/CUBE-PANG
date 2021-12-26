@@ -33,6 +33,7 @@ public class BoardInput : MonoBehaviour
             if (!ReferenceEquals(Board.GetBall(clickedPos), null))
             {
                 Board.BoardFiller.DestroyBall(Board.BoardQuery.GetPopBalls(clickedPos));
+                //Board.PlayPopSound();
             }
             else
             {

@@ -26,6 +26,8 @@ public class Board : MonoBehaviour
 
     public bool IsPlayingNow = false;
 
+    public GameObject AlertLine;
+
     public static string RecordKey = "Record";
     public static string IsPlayingKey = "IsPlaying";
     public static string PresetIndexKey = "PresetIndex";
@@ -34,8 +36,15 @@ public class Board : MonoBehaviour
     public static string ShowADKey = "ShowAD";
     public static int ShowADTerm = 2;
 
+    [SerializeField]
+    private AudioSource m_PopAudioSource;
+
+    [SerializeField]
+    private AudioSource m_DumpAudioSource;
+
     private void Start()
     {
+
         CurrentBalls = new Ball[BoardSize.x, BoardSize.y];
         CreateTiles();
 
@@ -52,6 +61,16 @@ public class Board : MonoBehaviour
     {
         if (IsPlayingNow && BoardInput.IsInputableNow())
             SaveCurrentData();
+    }
+
+    public void PlayPopSound()
+    {
+        m_PopAudioSource.Play();
+    }
+
+    public void PlayDumpSound()
+    {
+        m_DumpAudioSource.Play();
     }
 
     public void GameOver()

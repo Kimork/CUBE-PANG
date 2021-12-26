@@ -176,6 +176,10 @@ public class BoardFiller : MonoBehaviour
 
     private IEnumerator FillRowRoutine()
     {
+
+        Board.PlayDumpSound();
+
+
         foreach (var _ball in Board.CurrentBalls)
         {
             if (!ReferenceEquals(_ball, null) && _ball.IsPopSprite)
@@ -250,6 +254,12 @@ public class BoardFiller : MonoBehaviour
                     _ball.StartAfraidAnim();
                 }
             }
+
+            Board.AlertLine.SetActive(true);
+        }
+        else
+        {
+            Board.AlertLine.SetActive(false);
         }
 
         if (_isGameOver)

@@ -136,7 +136,7 @@ public class OnGameStart : SingletonManager<OnGameStart>
     private void InitGPGS()
     {
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-            .RequestServerAuthCode(false)
+            //.RequestServerAuthCode(false)
             .Build();
         PlayGamesPlatform.InitializeInstance(config);
 
