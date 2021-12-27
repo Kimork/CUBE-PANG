@@ -22,28 +22,28 @@ TextureImporter:
     second: Home
   - first:
       213: 6587174017013465952
-    second: UI2_sheet_white1x_6
+    second: X
   - first:
       213: 8874801902495724494
-    second: UI2_sheet_white1x_7
+    second: PAUSE
   - first:
       213: 8703640156501947989
-    second: UI2_sheet_white1x_8
+    second: INFO
   - first:
       213: 2760594135757730816
-    second: UI2_sheet_white1x_9
+    second: Y
   - first:
       213: 3246449488673916589
-    second: UI2_sheet_white1x_10
+    second: POWER
   - first:
       213: -3564711580129094094
-    second: UI2_sheet_white1x_11
+    second: SOUND_ON
   - first:
       213: 4369330805344245608
-    second: UI2_sheet_white1x_12
+    second: SOUND_OFF
   - first:
       213: -2207853318052137502
-    second: UI2_sheet_white1x_13
+    second: RESUME
   - first:
       213: 868686556858777055
     second: UI2_sheet_white1x_14
@@ -500,7 +500,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -716,6 +716,174 @@ TextureImporter:
       bones: []
       spriteID: cd7f23f913ea44140800000000000000
       internalID: 4703075439029188572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: X
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 66
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06345cd3ed75a6b50800000000000000
+      internalID: 6587174017013465952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PAUSE
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 119
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec3f7324f41a92b70800000000000000
+      internalID: 8874801902495724494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: INFO
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 64
+        width: 34
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 556bf15cb9a89c870800000000000000
+      internalID: 8703640156501947989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Y
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 468
+        width: 43
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 004bdde7db99f4620800000000000000
+      internalID: 2760594135757730816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: POWER
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 263
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da648a90c94bd0d20800000000000000
+      internalID: 3246449488673916589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SOUND_ON
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 467
+        width: 34
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2361fab54b9978ec0800000000000000
+      internalID: -3564711580129094094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SOUND_OFF
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 418
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86717beb73bf2ac30800000000000000
+      internalID: 4369330805344245608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RESUME
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 17
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e5b55dda112c51e0800000000000000
+      internalID: -2207853318052137502
       vertices: []
       indices: 
       edges: []

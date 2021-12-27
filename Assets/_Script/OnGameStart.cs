@@ -206,6 +206,7 @@ public class OnGameStart : SingletonManager<OnGameStart>
             EncryptedPlayerPrefs.SetInt(Board.PresetIndexKey, 0);
             EncryptedPlayerPrefs.SetInt(Board.LastScoreKey, 0);
             EncryptedPlayerPrefs.SetString(Board.BallsDataKey, "Null");
+            EncryptedPlayerPrefs.SetInt(Board.SoundOnOffKey, 1);
         }
 
         if (!EncryptedPlayerPrefs.HasKey(Board.ShowADKey))

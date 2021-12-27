@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Board : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class Board : MonoBehaviour
     public static string BallsDataKey = "BallsData";
     public static string LastScoreKey = "LastScore";
     public static string ShowADKey = "ShowAD";
+    public static string SoundOnOffKey = "SoundOnOff";
     public static int ShowADTerm = 2;
 
     [SerializeField]
@@ -41,6 +43,10 @@ public class Board : MonoBehaviour
 
     [SerializeField]
     private AudioSource m_DumpAudioSource;
+
+    public Image SoundUI;
+    public Sprite[] SoundOnOffSprite;
+    private bool IsSoundOn = true;
 
     private void Start()
     {
@@ -71,6 +77,41 @@ public class Board : MonoBehaviour
     public void PlayDumpSound()
     {
         m_DumpAudioSource.Play();
+    }
+
+    public void SoundOnOff()
+    {
+        if (IsSoundOn)
+        {
+            m_DumpAudioSource.volume = 0;
+            SoundUI.sprite = SoundOnOffSprite[1];
+            IsSoundOn = false;
+            EncryptedPlayerPrefs.SetInt(SoundOnOffKey, 0);
+        }
+        else
+        {
+            m_DumpAudioSource.volume = 0.4f;
+            SoundUI.sprite = SoundOnOffSprite[0];
+            IsSoundOn = true;
+            EncryptedPlayerPrefs.SetInt(SoundOnOffKey, 1);
+        }
+
+    }
+
+    public void SoundSet(bool isOn)
+    {
+        if (isOn)
+        {
+            m_DumpAudioSource.volume = 0.4f;
+            SoundUI.sprite = SoundOnOffSprite[0];
+            IsSoundOn = true;
+        }
+        else
+        {
+            m_DumpAudioSource.volume = 0;
+            SoundUI.sprite = SoundOnOffSprite[1];
+            IsSoundOn = false;
+        }
     }
 
     public void GameOver()
@@ -198,6 +239,18 @@ public class Board : MonoBehaviour
         else
         {
             StartNewGame();
+        }
+
+        if (!EncryptedPlayerPrefs.HasKey(SoundOnOffKey))
+            EncryptedPlayerPrefs.SetInt(SoundOnOffKey, 1);
+
+        if (EncryptedPlayerPrefs.GetInt(SoundOnOffKey) == 1)
+        {
+            SoundSet(true);
+        }
+        else if (EncryptedPlayerPrefs.GetInt(SoundOnOffKey) == 0)
+        {
+            SoundSet(false);
         }
     }
 
