@@ -9,22 +9,22 @@ using GoogleMobileAds.Api;
 public class OnGameStart : SingletonManager<OnGameStart>
 {
     public static bool IsLoginGPGS = false;
-    public static bool ShowAD = false;
+    public static bool ShowAD = true;
 
     private BannerView m_BannerView;
     private InterstitialAd m_PopupAD;
 
 
     //ca-app-pub-3940256099942544/6300978111 테스트 배너
-    //ca-app-pub-7998524345364346/7584837821 내 배너
+    //ca-app-pub-7998524345364346/9208733073 내 배너
 
     //ca-app-pub-3940256099942544/1033173712 테스트 전면 광고
-    //ca-app-pub-7998524345364346/9208733073 내 전면광고
+    //ca-app-pub-7998524345364346/7584837821 내 전면광고
 
     //ca-app-pub-3940256099942544~3347511713 테스트 앱 id
     //ca-app-pub-7998524345364346~8818028442 내 앱 id
-    private string m_PopupAD_UnitID = "ca-app-pub-3940256099942544/1033173712";
-    private string m_BannerAD_UnitID = "ca-app-pub-3940256099942544/6300978111";
+    private string m_PopupAD_UnitID = "ca-app-pub-7998524345364346/7584837821";
+    private string m_BannerAD_UnitID = "ca-app-pub-7998524345364346/9208733073";
 
     public override void Awake()
     {

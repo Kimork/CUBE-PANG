@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R5CN5036D2J",
         "name": "com.hieutLab.BumpPop",
-        "processId": 20991,
+        "processId": 25070,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -66,6 +66,12 @@
             "deviceId": "R5CN5036D2J",
             "name": "com.hieutLab.BumpPop",
             "processId": 20991,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CN5036D2J",
+            "name": "com.hieutLab.BumpPop",
+            "processId": 25070,
             "exited": false
         }
     ],
